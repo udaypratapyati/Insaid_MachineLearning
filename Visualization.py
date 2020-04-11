@@ -80,3 +80,41 @@ def show_count_plot(x_col_name, hue_col_name, df, max_ytick, ytick_step):
     plt.legend(labels = ['Not Default', 'Default'], loc = 'upper right')
     plt.title('Frequency occurence of Ownership Type', y=1.05, size = 16)
     plt.show()       
+
+def show_corr_matrix(dataframe, feature_cols, target_col) :
+    '''
+        Plots the co-relation matrix with of feature_cols with target_col
+        Returns pyplot object incase one needs to save the plot as images...
+    
+    dataframe       : dataframe for which corr matrix needs to be plotted.
+    feature_cols    : numerical features which need to be included in corr matrix
+    target_col      : target feature variable.
+    
+    Return  :    
+        plt     : matplotlib.pyplot object 
+        
+    Usage : 
+        plt = show_corr_matrix(dataframe, feature_cols, target_col)
+        plt.savefig('Co-relation Matrix.png') 
+    '''
+
+    target = target_col
+
+    corr = dataframe.corr()
+    corr_abs = corr.abs()
+
+    nr_num_cols = len(feature_cols)
+
+    cols = corr_abs.nlargest(nr_num_cols, target)[target].index
+    cm = np.corrcoef(dataframe[cols].T)
+
+    # Generate a mask for the upper triangle (taken from seaborn example gallery)
+    mask = np.zeros_like(cm, dtype=np.bool)
+    mask[np.triu_indices_from(mask)] = True
+
+    plt.figure(figsize=(15,8))
+    _hm = sns.heatmap(cm, annot=True, cmap = 'coolwarm', vmax=.9, linecolor='white', linewidths=.1, mask=mask,
+                     fmt='.2f', annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
+    plt.title('Co-relation Matrix')
+    
+    return plt
