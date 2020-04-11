@@ -35,3 +35,18 @@ def show_duplicate_columns(dataframe):
     else:
         return list(names)
  
+def remove_outliers_3Q(df, col):
+    import numpy as np 
+    Q1 = np.percentile(df[col], 25, interpolation = 'midpoint')
+    Q3 = np.percentile(df[col], 75, interpolation = 'midpoint')
+    IQR = Q3 - Q1
+    print('IQR :', IQR)
+    print('Q1 : {} \nQ3: {}'.format(Q1, Q3))
+    print('Lower limit : {} \nUpper limit : {}'.format( Q1 - IQR*1.5, Q3 + IQR*1.5))
+
+    return df[(df[col] < (Q1 - IQR*1.5)) & (df[col] > (Q3 + IQR*1.5))]
+
+def get_numerical_categorical_cols(df):
+    lis_num = list(df.select_dtypes(include='object').columns)
+    lis_cat = list(df.select_dtypes(exclude='object').columns)
+    return lis_num, lis_cat
