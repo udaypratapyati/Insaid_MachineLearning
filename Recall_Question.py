@@ -1,3 +1,17 @@
+#%%
+# Bank Marketing
+# Abstract: The data is related with direct marketing campaigns (phone calls) of a Portuguese banking institution. The classification goal is to predict if the client will subscribe a term deposit (variable y).
+
+# Data Set Information: The data is related with direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls. Often, more than one contact to the same client was required, in order to access if the product (bank term deposit) would be ('yes') or not ('no') subscribed.
+
+# Source:
+# Dataset from : http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
+# FALSE POSITIVE & FALSE NEGATIVE AND IT'S IMPACT ON BUSINESS
+# FALSE POSITIVE - The events which are predicted to happen but they don't occur in real life. Here in the context of dataset and business involved, the false positive results in predicted term deposit by customers ont he basis of phone marketing, but they actually do not turn up to make the term deposit.
+# FALSE NEGATIVE - The events which are not predicted to happen but they do occur in real life. In this case the prediction is made as the customer will not be making term deposit but they do actually make the term deposit.
+
+# So, concluding from the above two case, we need to cater/ lower down the False negative becasue in any business we cannot assume customer will have prior knowledge of our products and services. Even though they know, we need to do the marketing in order to not loose a single customer .
+
 # %%
 import pandas as pd
 bank = pd.read_csv('https://raw.githubusercontent.com/insaid2018/Term-2/master/Data/bank.csv')
