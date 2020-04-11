@@ -5,8 +5,12 @@ import matplotlib.pyplot as plt
 
 from sklearn.metrics import auc, roc_curve
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
 from yellowbrick.classifier import PrecisionRecallCurve
 from xgboost import to_graphviz, plot_importance
+
+def show_summary(ytest, ypred):
+    print(classification_report(ytest, ypred))
 
 def show_confusion_matrix(actual_val, pred_val, col_header_list, index_list):
     matrix = pd.DataFrame(confusion_matrix(actual_val, pred_val))
@@ -16,6 +20,7 @@ def show_confusion_matrix(actual_val, pred_val, col_header_list, index_list):
 
 def show_roc_curve(model, xtest, ytest):
     probs = model.predict_proba(xtest)
+    print(probs)
     preds = probs[:,1]
     fpr, tpr, _threshold = roc_curve(ytest, preds)
     roc_auc = auc(fpr, tpr)
