@@ -31,6 +31,10 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import auc, roc_curve
 from sklearn.metrics import classification_report
 
+# Apriori
+from mlxtend.frequent_patterns import apriori, association_rules 
+from mlxtend.preprocessing import TransactionEncoder
+
 # For Preprocessing & Scaling
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler, StandardScaler
 
